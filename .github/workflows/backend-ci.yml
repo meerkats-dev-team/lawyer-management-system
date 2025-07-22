@@ -5,19 +5,29 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    # Add this verification step
-    - name: Verify backend files
-      run: |
-        echo "Current directory: $(pwd)"
-        ls -la backend/
-        [ -f backend/package.json ] && echo "package.json found" || echo "package.json missing"
-        
-    # Fixed install step
-    - name: Install backend dependencies
-      run: npm install
-      working-directory: ./backend  # Critical fix
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify backend files
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -la backend/
+          [ -f backend/package.json ] && echo "package.json found" || echo "package.json missing"
+
+      - name: Install backend dependencies
+        run: npm install
+        working-directory: ./backend
+
+      - name: Build backend
+        run: npm run build
+        working-directory: ./backend
+
+      - name: Lint backend
+        run: npm run lint
+        working-directory: ./backend
+
+      - name: Test backend
+        run: npm test
+        working-directory: ./backend

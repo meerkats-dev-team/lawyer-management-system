@@ -8,7 +8,7 @@ const contactInfoSchema = z.object({
 
 export const createClientSchema = z.object({
   body: z.object({
-    name: z.string({ required_error: 'Client name is required' }).min(2, 'Client name must be at least 2 characters'),
+    name: z.string().nonempty('Client name is required').min(2, 'Client name must be at least 2 characters'),
     contactInfo: contactInfoSchema,
   }),
 });
@@ -19,12 +19,12 @@ export const updateClientSchema = z.object({
     contactInfo: contactInfoSchema,
   }),
   params: z.object({
-      id: z.string({ required_error: 'Client ID is required in URL params' }),
+      id: z.string().nonempty( 'Client ID is required in URL params'),
   }),
 });
 
 export const clientIdSchema = z.object({
     params: z.object({
-        id: z.string({ required_error: 'Client ID is required in URL params' }),
+        id: z.string().nonempty( 'Client ID is required in URL params' ),
     }),
 });

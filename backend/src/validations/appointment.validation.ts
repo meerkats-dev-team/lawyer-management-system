@@ -22,8 +22,8 @@ export const appointmentParamsSchema = z.object({
 // مخطط لإنشاء موعد جديد (يتحقق من الـ body فقط)
 export const createAppointmentSchema = z.object({
   body: z.object({
-    time: z.string({ required_error: 'Time is required' }).datetime({ message: 'Invalid datetime format. Expected ISO 8601 format.' }),
-    location: z.string({ required_error: 'Location is required' }).min(3),
+    time: z.string().nonempty( 'Time is required').datetime({ message: 'Invalid datetime format. Expected ISO 8601 format.' }),
+    location: z.string().nonempty('Location is required' ).min(3),
     notes: z.string().optional(),
     status: z.nativeEnum(AppointmentStatus).optional(),
   }),
