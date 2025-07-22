@@ -22,11 +22,11 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-        working-directory: ./lawyer-management-system/backend
+        working-directory: backend
 
       - name: Build Node Project
         run: npm run build
-        working-directory: ./lawyer-management-system/backend
+        working-directory: backend
 
       # - name: Lint Code
       #   run: npm run lint
