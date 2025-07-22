@@ -32,7 +32,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # استخدم نفس إصدار Node.js الذي تستخدمه محليًا
+          node-version: '22' # استخدم نفس إصدار Node.js الذي تستخدمه محليًا
           cache: 'npm' # تفعيل الكاش لتسريع تثبيت الحزم في المرات القادمة
           cache-dependency-path: backend/package-lock.json
 
