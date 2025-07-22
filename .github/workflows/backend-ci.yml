@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: lawyer-management-system/backend/package-lock.json
+          cache-dependency-path: backend/package-lock.json
 
       - name: Install Dependencies
         run: npm ci
@@ -29,12 +29,22 @@ jobs:
         run: npm run lint
         working-directory: ./lawyer-management-system/backend
 
-      - name: Run Tests
-        run: npm test
+      - name: Run Tests with Coverage
+        run: npm test -- --coverage
         working-directory: ./lawyer-management-system/backend
-        env:
-          JWT_SECRET: "a_secret_for_ci_is_fine"
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ./lawyer-management-system/backend/coverage
 
       - name: Build Project
         run: npm run build
         working-directory: ./lawyer-management-system/backend
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-dist
+          path: ./lawyer-management-system/backend/dist
