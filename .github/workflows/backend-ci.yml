@@ -1,70 +1,45 @@
-# اسم سير العمل الذي سيظهر في تبويب Actions في GitHub
 name: Backend CI Pipeline
 
-# متى يتم تشغيل سير العمل؟
 on:
-  # عند الدفع (push) إلى الفرع الرئيسي
   push:
-    branches: [ main ] # أو master حسب اسم فرعك الرئيسي
-  # عند إنشاء طلب سحب (pull request) يستهدف الفرع الرئيسي
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
-# تحديد المهام التي سيتم تنفيذها
 jobs:
-  # اسم المهمة (يمكنك تسميتها أي شيء)
   build-and-test:
-    # تحديد نظام التشغيل الذي ستعمل عليه المهمة
     runs-on: ubuntu-latest
-    
-    # تحديد مجلد العمل. هذا مهم لأن لدينا backend و frontend.
-    defaults:
-      run:
-        working-directory: ./backend
 
-    # خطوات المهمة
     steps:
-      # الخطوة 1: سحب الكود من المستودع
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # الخطوة 2: إعداد بيئة Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20' # استخدم نفس إصدار Node.js الذي تستخدمه محليًا
-          cache: 'npm' # تفعيل الكاش لتسريع تثبيت الحزم في المرات القادمة
-          cache-dependency-path: backend/package-lock.json
+          node-version: '18'
+          cache: 'npm'
+          # FIX: Add the nested folder path here
+          cache-dependency-path: lawyer-management-system/backend/package-lock.json
 
-      # الخطوة 3: تثبيت الاعتماديات
-      # نستخدم 'npm ci' بدلاً من 'npm install' لأنها أسرع ومصممة لبيئات CI
       - name: Install Dependencies
         run: npm ci
+        # FIX: Add the nested folder path here
+        working-directory: ./lawyer-management-system/backend
 
-      # الخطوة 4: تشغيل مدقق الكود (Linter)
       - name: Run Linter
         run: npm run lint
+        # FIX: Add the nested folder path here
+        working-directory: ./lawyer-management-system/backend
 
-      # الخطوة 5: تشغيل الاختبارات
-      # يجب توفير متغيرات البيئة للاختبارات (مثل JWT_SECRET)
       - name: Run Tests
         run: npm test
+        # FIX: Add the nested folder path here
+        working-directory: ./lawyer-management-system/backend
         env:
-          JWT_SECRET: "a_secret_for_ci_is_fine" # يمكن استخدام أي قيمة هنا للاختبار
-          # ليس هناك حاجة لـ MONGO_URI لأن الاختبارات تستخدم قاعدة بيانات في الذاكرة
+          JWT_SECRET: "a_secret_for_ci_is_fine"
           
-      # الخطوة 6 (اختياري لكن موصى به): بناء المشروع
-      # هذا يتأكد من أن كود TypeScript يتم تحويله إلى JavaScript بنجاح
       - name: Build Project
         run: npm run build
-        
-      # --- قسم النشر المستمر (CD) ---
-      # هذا الجزء هو مثال توضيحي لكيفية النشر.
-      # قم بتفعيله وتخصيصه بناءً على منصة الاستضافة التي تستخدمها (Heroku, AWS, Vercel, etc.)
-      # - name: Build and push Docker image
-      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: ./backend
-      #     push: true
-      #     tags: your-docker-hub-username/law-firm-backend:latest
+        # FIX: Add the nested folder path here
+        working-directory: ./lawyer-management-system/backend
