@@ -1,0 +1,71 @@
+# BACKEND TODO
+
+## 1. إعداد المشروع
+- [×] إنشاء مجلد backend، تهيئة package.json
+- [×] إضافة TypeScript + tsconfig.json
+- [×] إعداد ESLint وPrettier
+
+## 2. إعداد Express & هيكلية المجلدات
+- [×] إنشاء ملف بدء الخادم (src/server.ts)
+- [×] إعداد هيكل المجلدات:
+  ├── controllers/
+  ├── models/
+  ├── routes/
+  ├── services/
+  ├── middlewares/
+  ├── utils/
+  └── config/
+
+## 3. الاتصال بقاعدة البيانات (MongoDB)
+- [×] إعداد الاتصال بـ mongoose
+- [×] إنشاء config variables (URI, secret, Cloudinary…)
+
+## 4. نموذج User + التسجيل والتوثيق
+- [×] Model: User.schema.ts (name, email, password?, avatarUrl, socialId…)
+- [×] Zod schema: register & login
+- [×] Routes:
+    - POST /auth/register
+    - POST /auth/login
+    - GET /auth/google & callback
+    - GET /auth/facebook & callback
+- [×] Controllers: logic لتسجيل، توليد JWT، OAuth عبر Passport.js
+- [×] Middleware: verify JWT
+
+## 5. إدارة العملاء (Client)
+- [×] Model: Client.schema.ts (name, contactInfo, ownerId)
+- [×] Zod schema: create/update Client
+- [×] Routes CRUD: GET/POST/PUT/DELETE /clients
+- [×] Controllers لكل وظيفة
+
+## 6. إدارة القضايا (Case)
+- [×] Model: Case.schema.ts (title, description, status, ownerId, clientId, createdAt)
+- [×] Zod schema: create/update Case
+- [×] Routes CRUD: GET/POST/PUT/DELETE /cases
+- [×] Controllers: logic CRUD
+
+## 7. إدارة المواعيد (Appointment)
+- [×] Model: Appointment.schema.ts (time, location, status, caseId)
+- [×] Zod schema: create/update Appointment
+- [×] Routes CRUD: GET/POST/PUT/DELETE /appointments
+- [×] Controllers: logic CRUD
+
+## 8. رفع الملفات (File Upload)
+- [×] إعداد Cloudinary SDK
+- [×] Model: File.schema.ts (fileUrl, description, caseId)
+- [×] Zod schema: file upload
+- [×] Route: POST /cases/:id/files, GET /cases/:id/files, DELETE /files/:id
+- [×] Controllers: رفع للحفظ والمسح
+
+## 9. توثيق API بـ Swagger
+- [×] إعداد swagger.json أو JSDoc مع swagger-ui
+- [×] تغطية كل route مع schemas ونماذج الاستجابة
+
+## 10. اختبارات بسيطة
+- [ ] إعداد Jest أو Mocha
+- [ ] اختبار auth + CRUD clients + cases
+
+## 11. CI/CD
+- [ ] إعداد GitHub Actions:
+    - lint
+    - test
+    - بناء Dokcer image أو نشر تلقائي

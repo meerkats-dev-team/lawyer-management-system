@@ -1,0 +1,61 @@
+# FRONTEND TODO
+
+## 1. إعداد المشروع
+- [ ] إنشاء مجلد frontend، تهيئة package.json
+- [ ] تثبيت React + TypeScript
+- [ ] إعداد ESLint وPrettier
+
+## 2. هيكلية المجلدات
+- [ ] تنظيم src/ كالتالي:
+  ├── components/
+  ├── pages/
+  ├── api/
+  ├── context/ (AuthContext)
+  ├── hooks/
+  ├── validations/ (Zod schemas)
+  └── assets/
+
+## 3. تكوين API service
+- [ ] إنشاء api.ts مع axios:
+    - إعداد baseURL + interceptors JWT
+- [ ] وظائف: login, register, CRUD clients, cases, appointments, file upload
+
+## 4. Auth Context + صفحات تسجيل
+- [ ] AuthContext: حفظ & تحديث JWT
+- [ ] Page: Register
+- [ ] Page: Login (بما فيهم Social Login عبر Google/Facebook SDK)
+- [ ] حفظ avatar عند التسجيل
+
+## 5. واجهة إدارة العملاء
+- [ ] صفحة ClientList: جلب العملاء + جدول + زر إضافة
+- [ ] صفحة ClientForm: إنشاء/تعديل العميل
+
+## 6. واجهة إدارة القضايا
+- [ ] صفحة CaseList: عرض القضايا + بحث + إنشاء/تعديل/حذف
+- [ ] CaseForm: نموذج لإنشاء/تعديل قضية
+
+## 7. واجهة إدارة المواعيد
+- [ ] داخل تفاصيل القضية، component يضم:
+    - AppointmentList: قائمة + أزرار تعديل/حذف
+    - AppointmentForm: لإضافة/تعديل موعد
+
+## 8. رفع الملفات ومشاهدتها
+- [ ] FileUpload component: رفع ملفات بالقضية
+- [ ] FileList component: عرض ملفات + روابط مشاهدة + حذف
+
+## 9. التحقق من البيانات (Zod)
+- [ ] لكل Form: إضافة Zod schema للتحقق قبل الإرسال
+- [ ] عرض رسائل خطأ واضحة إذا البيانات غير صحيحة
+
+## 10. المظهر والتنبيهات
+- [ ] استخدام مكتبة UI (Material UI أو Ant Design)
+- [ ] استخدام snackbar/notification عند النجاح أو الخطأ
+
+## 11. التوثيق والاختبارات
+- [ ] ربط الـ Swagger UI عبر رابط Front-end (للاطلاع على Docs)
+- [ ] كتابة اختبارات واجهة بسيطة باستخدام Testing Library
+
+## 12. إعداد النشر
+- [ ] بناء المشروع (npm build)
+- [ ] تكوين للنشر (مثل Vercel أو Netlify)
+- [ ] دمج مع النشر الخلفي
