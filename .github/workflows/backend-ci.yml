@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: backend/package-lock.json
+          cache-dependency-path: lawyer-management-system/backend/package-lock.json
 
       - name: Install Dependencies
         run: npm ci
