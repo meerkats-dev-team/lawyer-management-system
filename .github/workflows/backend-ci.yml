@@ -1,50 +1,27 @@
-name: Backend CI Pipeline
+name: Deployment pipeline
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
+    tags:
+      - '*'
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: lawyer-management-system/backend/package-lock.json
+          node-version: '20.8.1'
 
       - name: Install Dependencies
         run: npm ci
-        working-directory: ./lawyer-management-system/backend
 
-      - name: Run Linter
-        run: npm run lint
-        working-directory: ./lawyer-management-system/backend
-
-      - name: Run Tests with Coverage
-        run: npm test -- --coverage
-        working-directory: ./lawyer-management-system/backend
-
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: ./lawyer-management-system/backend/coverage
-
-      - name: Build Project
+      - name: Build Node Project
         run: npm run build
-        working-directory: ./lawyer-management-system/backend
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: backend-dist
-          path: ./lawyer-management-system/backend/dist
