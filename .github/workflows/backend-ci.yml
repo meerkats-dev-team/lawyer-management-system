@@ -27,3 +27,11 @@ jobs:
       - name: Build Node Project
         run: npm run build
         working-directory: backend
+
+      - name: Lint Code
+        run: npm run lint
+        working-directory: backend
+
+      - name: Run Tests
+        run: npm test
+        working-directory: backend
