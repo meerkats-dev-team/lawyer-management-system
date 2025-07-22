@@ -19,27 +19,22 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          # FIX: Add the nested folder path here
           cache-dependency-path: lawyer-management-system/backend/package-lock.json
 
       - name: Install Dependencies
         run: npm ci
-        # FIX: Add the nested folder path here
         working-directory: ./lawyer-management-system/backend
 
       - name: Run Linter
         run: npm run lint
-        # FIX: Add the nested folder path here
         working-directory: ./lawyer-management-system/backend
 
       - name: Run Tests
         run: npm test
-        # FIX: Add the nested folder path here
         working-directory: ./lawyer-management-system/backend
         env:
           JWT_SECRET: "a_secret_for_ci_is_fine"
-          
+
       - name: Build Project
         run: npm run build
-        # FIX: Add the nested folder path here
         working-directory: ./lawyer-management-system/backend
